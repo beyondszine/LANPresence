@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/beyondszine/LANPresence/issues"
   },
-  "homepage": "https://github.com/beyondszine/LANPresence#readme"
+  "homepage": "https://github.com/beyondszine/LANPresence#readme",
+  "dependencies": {
+    "arpscan": "^1.0.2",
+    "influx": "^5.0.7"
+  }
 }
