@@ -6,13 +6,13 @@ const arpScanner = require('arpscan');
 
 var options={
     command :   'arp-scan',
-    args    :   ['-l'],
+    args    :   ['192.168.1.1/24'],
     interface : 'wlp2s0',
-    sudo    :   true
+    sudo    :   false
 };
 
 const influx = new Influx.InfluxDB({
-  host: 'localhost',
+  host: '192.168.1.113:8086',
   database: 'Presence',
   schema: [
     {
@@ -59,5 +59,5 @@ influx.getDatabaseNames()
     arpScanner(onResult, options);
   })
   .catch(err => {
-    console.error(`Error creating Influx database!`)
+    console.error(`Error creating Influx database!`,err)
   })

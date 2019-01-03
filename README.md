@@ -9,7 +9,7 @@ Description:
     docker run -p 8086:8086 -v /tmp/infludbtemp:/var/lib/influxdb influxdb
     ```
 -   This app is assumed to run periodcially after desired amount of time to gather the time-series data. Ex- 10 minutes.
-    -   # Adding as a cron job
+    -   ### Adding as a cron job
         ```sh
         */5 * * * * /usr/bin/node /path/to/my/projct/app.js
         ```
@@ -34,3 +34,5 @@ Srcs:
 -   https://github.com/node-influx/node-influx
 -   https://www.influxdata.com/blog/getting-started-with-node-influx/
 -   https://hub.docker.com/_/influxdb/
+-   https://github.com/initialstate/pi-sensor-free-presence-detector/wiki
+

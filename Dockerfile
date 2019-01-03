@@ -1,6 +1,5 @@
 
-FROM node:8-alpine
-
+FROM node
 
 LABEL maintainer="saurabh shandilya <saurabhshandilya.1991@gmail.com>"
 
@@ -16,11 +15,14 @@ ENV PORT ${APP_PORT}
 EXPOSE ${APP_PORT}
 
 # Add source code
-COPY . /app
 WORKDIR /app
+COPY . /app
 
 # Make scripts executable
 RUN chmod +x *.sh
+RUN apt update && apt install arp-scan
+
+RUN npm install --prod
 
 # RUN groupadd -r nodejs && useradd -m -r -g nodejs nodejs
 # USER nodejs
@@ -30,11 +32,11 @@ RUN chmod +x *.sh
 ##########################################
 
 # Add Tini
-ENV TINI_VERSION v0.18.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-RUN chmod +x /tini
-ENTRYPOINT ["/tini", "-g", "--", "/entrypoint.sh"]
-CMD ["/usr/bin/node","app.js"]
+# ENV TINI_VERSION v0.18.0
+# ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+# RUN chmod +x /tini
+# ENTRYPOINT ["/tini", "-g", "--", "/usr/bin/node","app.js"]
+CMD ["node","app.js"]
 
 # Run the start script, it will check for an /app/prestart.sh script (e.g. for migrations)
 # And then will start Supervisor, which in turn will start Nginx and uWSGI
