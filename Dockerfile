@@ -20,7 +20,7 @@ COPY . /app
 
 # Make scripts executable
 RUN chmod +x *.sh
-RUN apt update && apt install arp-scan
+RUN apt-get update && apt-get -y install arp-scan
 
 RUN npm install --prod
 
