@@ -23,6 +23,7 @@
   "homepage": "https://github.com/beyondszine/LANPresence#readme",
   "dependencies": {
     "arpscan": "^1.0.2",
+    "config": "^3.0.1",
     "influx": "^5.0.7",
     "winston": "^3.1.0"
   }

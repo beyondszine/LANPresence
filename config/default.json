@@ -1,0 +1,23 @@
+{
+    "Scan" : {
+      "dbConfig": {
+        "host": "localhost",  // hostname for your database.
+        "port": 8086,
+        "dbName": "presence", // Database name, if it doesn't exist, it will be created if credentials allow it.
+        "measurementName" : "presenceIdentifier",
+        "username": "",
+        "password": ""
+      },
+      "LogConfig": {
+        "logFile": "/tmp/presence_scan.log",
+        // Set low for development
+        "logLevel": "debug"
+      },
+      "ScannerConfig":{
+          "program":"arp-scan",
+          "location" : "/usr/bin/arp-scan",
+          "targetNetwork" : "192.168.1.0/24",
+          "networkInterace" : "eth0"
+      }
+    }
+  }
