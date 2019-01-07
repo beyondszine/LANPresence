@@ -5,6 +5,7 @@ const arpScanner = require('arpscan');
 const winston = require('winston');
 var program = require('commander');
 var config = require('config');
+
 var macToName = require('./macMapping');
 
 var dbConfig = config.get('Scan.dbConfig');
@@ -14,37 +15,6 @@ var scannerConfig = config.get('Scan.ScannerConfig');
 console.log(dbConfig);
 console.log(logConfig);
 console.log(scannerConfig);
-
-
-
-// program
-//   .version('0.1.0')
-//   .option('-s, --scanner', 'arp scan command')
-//   .action(scannerdetected)
-  // .option('-c, --scanner-command', 'scanner binary command')
-  // .option('-n, --network', 'Network Domain to scan with subnet')
-  // .option('-i, --interface', 'Network Interface to send packets to')
-  // .option('-h, --host', 'Database Hostname Address')
-  // .option('-u, --username', 'Database username')
-  // .option('-p, --password', 'Database password')
-  // .parse(process.argv);
-
-
-
-function scannerdetected(dir,cmd){
-  console.log('scanner detected');
-  console.log('dir : ',dir);
-  console.log('cmd : ',cmd);
-};
-
-if(program.scanner) {
-  console.log('  - scanner to use');
-  process.exit(0);
-}
-else{
-  console.log('No program scanner passed');
-  process.exit(-1);
-}
 
 const logger = winston.createLogger({
   levels: winston.config.syslog.levels,
@@ -57,25 +27,21 @@ const logger = winston.createLogger({
   ]
 });
 
-
 // Make all of them user interface variables & allow interfaces to be selected from drop down of available interfaces.
-
-var options={
-    command :   '/usr/sbin/arp-scan',
-    args    :   ['192.168.1.1/24'],
-    interface : 'wlp2s0',
+var scannerOptions={
+    command :   scannerConfig.program,
+    args    :   [scannerConfig.targetNetwork],
+    interface : scannerConfig.networkInterface,
     sudo    :   false
 };
 
 
-
 const influx = new Influx.InfluxDB({
-  // host: '192.168.1.113:8086',
-  host: 'localhost:8086',
-  database: 'Presence',
+  host: dbConfig.host,
+  database: dbConfig.dbName,
   schema: [
     {
-      measurement: 'presenceIdentifier2',
+      measurement: dbConfig.measurementName,
       fields: {
         alive: Influx.FieldType.BOOLEAN
       },
