@@ -2,7 +2,7 @@ const Influx = require('influx');
 const http = require('http');
 const os = require('os');
 const arpScanner = require('arpscan');
-
+var validator = require('validator');
 const winston = require('winston');
 var program = require('commander');
 var config = require('config');
@@ -11,9 +11,31 @@ var config = require('config');
 var dbConfig = config.get('Scan.dbConfig');
 var logConfig = config.get('Scan.LogConfig');
 var scannerConfig = config.get('Scan.ScannerConfig');
+
+// dbConfig.normalize();
+
+
 console.log(dbConfig);
 console.log(logConfig);
 console.log(scannerConfig);
+
+
+// function (){
+//   if(process.env.dbHost){
+//     logger.info('overriding hostname by environment variable');
+//     dbConfig.host=process.env.dbHost;
+//   }
+
+  // if(dbConfig){
+  //   validator.isPort(dbConfig.port);
+  //   validator.isURL(dbConfig.host);
+  //   validator.isPort(dbConfig.port);
+  // }
+  // else{
+
+  // }
+// }
+
 
 // program
 //   .version('0.1.0')

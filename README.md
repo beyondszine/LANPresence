@@ -1,11 +1,14 @@
 # LANPresence
+
+**Screenshots**
+[Presence_json.txt](Presence_json.txt)
+
 **Dependencies**:
     -   Debian System:
         ```sh
         sudo apt-get install arpscan
         ```
-
-
+        
 **Description**:
 -   This program runs a ARP-scan of local LAN network.  It works only in one broadcast domain or any casual network configuration.
 -   Firewalls, Virtual LANs, network with different broadcast domains can be a blocker.  
@@ -27,7 +30,7 @@
     ```
     -   Click on '+' sign on left pane of Grafana.
     -   Click on 'import'.
-    -   Upload the file in current repository by the name of [](Presence_json.txt)
+    -   Upload the file in current repository by the name of [Presence_json.txt](Presence_json.txt)
 
     
 
@@ -38,9 +41,6 @@
     -   How much time did any two spend together in hours/day/week? Useful to know how much time you spent in pair-programming ?
     -   Automatic attendance of employees.
     -   Is your friend alive ? Identify using his MAC address
-    -   
-
-
 
 
 

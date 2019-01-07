@@ -1,0 +1,23 @@
+{
+    "Scan" : {
+      "dbConfig": {
+        "host": "DB_HOST",  // hostname for your database.
+        "port": "DB_PORT",
+        "dbName": "DB_NAME", // Database name, if it doesn't exist, it will be created if credentials allow it.
+        "measurementName" : "MEASUREMENT_NAME",
+        "username": "DB_USERNAME",
+        "password": "DB_PASSWORD"
+      },
+      "LogConfig": {
+        "logFile": "LOGFILE_LOCATION",
+        // Set low for development
+        "logLevel": "LOG_LEVEL"
+      },
+      "ScannerConfig":{
+          "program":"SCANNER_PROG",
+          "location" : "SCANNER_PROG_LOCATION",
+          "targetNetwork" : "SCAN_NETWORK",
+          "networkInterace" : "SCAN_INTERFACE"
+      }
+    }
+  }
