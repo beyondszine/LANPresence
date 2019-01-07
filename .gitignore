@@ -1,5 +1,7 @@
 node_modules/
 .gitignore
 Dockerfile
+personalRun.sh
+macMapping.js
 
 

@@ -2,39 +2,19 @@ const Influx = require('influx');
 const http = require('http');
 const os = require('os');
 const arpScanner = require('arpscan');
-var validator = require('validator');
 const winston = require('winston');
 var program = require('commander');
 var config = require('config');
-
+var macToName = require('./macMapping');
 
 var dbConfig = config.get('Scan.dbConfig');
 var logConfig = config.get('Scan.LogConfig');
 var scannerConfig = config.get('Scan.ScannerConfig');
 
-// dbConfig.normalize();
-
-
 console.log(dbConfig);
 console.log(logConfig);
 console.log(scannerConfig);
 
-
-// function (){
-//   if(process.env.dbHost){
-//     logger.info('overriding hostname by environment variable');
-//     dbConfig.host=process.env.dbHost;
-//   }
-
-  // if(dbConfig){
-  //   validator.isPort(dbConfig.port);
-  //   validator.isURL(dbConfig.host);
-  //   validator.isPort(dbConfig.port);
-  // }
-  // else{
-
-  // }
-// }
 
 
 // program
@@ -87,19 +67,7 @@ var options={
     sudo    :   false
 };
 
-var macToName = {
-  "C0:EE:FB:FD:A9:B0" : "Shandilya's Phone",
-  "24:6E:96:06:E0:E8"  : "monster",
-  "D4:6E:0E:E8:28:00" : "Almighty Router",
-  "A0:99:9B:17:1F:75" : "Ashutosh's Macbook",
-  "7C:8B:CA:16:DB:15" : "Veda System",
-  "78:31:C1:D4:EB:06" : "Virendra's MacBook",
-  "94:DB:C9:B1:C7:3E" : "Yadav's laptop",
-  "78:0C:B8:D8:87:1D" : "Intel",
-  "EC:88:92:02:72:57" : "Motorola",
-  "5C:96:56:E7:C5:AD" : "PS4",
-  "18:F6:43:F1:49:F6" : "Apple device"
-};
+
 
 const influx = new Influx.InfluxDB({
   // host: '192.168.1.113:8086',

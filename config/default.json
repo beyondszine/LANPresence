@@ -10,7 +10,6 @@
       },
       "LogConfig": {
         "logFile": "/tmp/presence_scan.log",
-        // Set low for development
         "logLevel": "debug"
       },
       "ScannerConfig":{
@@ -18,6 +17,10 @@
           "location" : "/usr/bin/arp-scan",
           "targetNetwork" : "192.168.1.0/24",
           "networkInterace" : "eth0"
+      },
+      "macToName": {
+        "D4:6E:0E:XX:XX:XX" : "Almighty Router"
+        // add further MAC to 'Name' entries here; This name will appear on the Grafana dashboard.
       }
     }
   }
