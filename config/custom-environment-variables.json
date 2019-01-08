@@ -1,16 +1,15 @@
 {
     "Scan" : {
       "dbConfig": {
-        "host": "DB_HOST",  // hostname for your database.
+        "host": "DB_HOST",  
         "port": "DB_PORT",
-        "dbName": "DB_NAME", // Database name, if it doesn't exist, it will be created if credentials allow it.
+        "dbName": "DB_NAME",
         "measurementName" : "MEASUREMENT_NAME",
         "username": "DB_USERNAME",
         "password": "DB_PASSWORD"
       },
       "LogConfig": {
         "logFile": "LOGFILE_LOCATION",
-        // Set low for development
         "logLevel": "LOG_LEVEL"
       },
       "ScannerConfig":{

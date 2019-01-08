@@ -1,26 +1,25 @@
 {
     "Scan" : {
       "dbConfig": {
-        "host": "localhost",  // hostname for your database.
+        "host": "localhost",
         "port": 8086,
-        "dbName": "presence", // Database name, if it doesn't exist, it will be created if credentials allow it.
+        "dbName": "presence",
         "measurementName" : "presenceIdentifier",
         "username": "",
         "password": ""
       },
       "LogConfig": {
-        "logFile": "/tmp/presence_scan.log",
+        "logFile": "/tmp/presence.log",
         "logLevel": "debug"
       },
       "ScannerConfig":{
           "program":"arp-scan",
-          "location" : "/usr/bin/arp-scan",
+          "location" : "/usr/sbin/arp-scan",
           "targetNetwork" : "192.168.1.0/24",
-          "networkInterace" : "eth0"
+          "nwInterface" : "wlp2s0"
       },
       "macToName": {
         "D4:6E:0E:XX:XX:XX" : "Almighty Router"
-        // add further MAC to 'Name' entries here; This name will appear on the Grafana dashboard.
       }
     }
   }
