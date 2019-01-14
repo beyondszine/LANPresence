@@ -1,16 +1,34 @@
 const Influx = require('influx');
 const http = require('http');
 const os = require('os');
+const path = require('path');
 const arpScanner = require('arpscan');
 const winston = require('winston');
-// var program = require('commander');
-var config = require('config');
+const config = require('config');
+const ourConfigDir = path.join(__dirname, 'config');
+console.log(ourConfigDir);
+
+const baseConfig = config.util.loadFileConfigs(ourConfigDir);
+console.log(baseConfig);
 
 var macToName = require('./macMapping');
+var dbConfig = baseConfig.Scan.dbConfig;
+console.log("dbConfig:",dbConfig);
 
-var dbConfig = config.get('Scan.dbConfig');
-var logConfig = config.get('Scan.LogConfig');
-var scannerConfig = config.get('Scan.ScannerConfig');
+
+var logConfig = baseConfig.Scan.LogConfig;
+console.log("logConfig:",logConfig);
+
+var scannerConfig = baseConfig.Scan.ScannerConfig;
+console.log("scannerConfig:",scannerConfig);  
+
+
+function m_logConfig(){
+  logger.info("dbConfig:",dbConfig);
+  logger.info("logConfig:",logConfig);
+  logger.info("scannerConfig:",scannerConfig);  
+};
+
 
 const logger = winston.createLogger({
   levels: winston.config.syslog.levels,
@@ -34,7 +52,6 @@ var scannerOptions={
 
 const influx = new Influx.InfluxDB({
   username : dbConfig.username,
-  // host : 'db.vedalabs.in:8086',
   host : dbConfig.host,
   port : dbConfig.port,
   password : dbConfig.password,
@@ -80,7 +97,10 @@ function onResult(err, data){
                   },
                   fields: { alive : true },
                 }
-              ]).catch(err => {
+              ])
+              .then(function(){
+                logger.info('written successfully!');
+              }).catch(err => {
                 logger.error(`Error saving data to InfluxDB!`);
               });
         });
@@ -100,6 +120,14 @@ influx.getDatabaseNames()
     logger.error(`Error creating Influx database!`,err);
   });
 
-  logger.info(scannerOptions);
-  logger.info(dbConfig);
+
+  process.on('uncaughtException', (err) => {
+    logger.error(`Exception occured! ${err}`);
+  });
+ 
+  process.on('exit', (code) => {
+    logger.error(`About to exit with code: ${code}`);
+  });
+
+  // m_logConfig();
   arpScanner(onResult, scannerOptions);
